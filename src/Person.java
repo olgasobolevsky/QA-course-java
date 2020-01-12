@@ -1,56 +1,76 @@
-import com.sun.jdi.InvalidTypeException;
-
 import java.util.Scanner;
 
 public class Person {
-    public enum MaritalStatus{SINGLE, MARRIED, DEVORCED}
+    public enum MaritalStatus{SINGLE, MARRIED, DIVORCED}
     private int id;
     private String firstName;
     private String lastName;
     private  MaritalStatus status;
 
-    public Person(int id, String firstName, String lastName, MaritalStatus status) {
-        setId(id);
-        setFirstName(firstName);
-        setLastName(lastName);
-        setStatus(status);
+    public Person() {
+       input();
     }
 
-    public void input(){
+    private void input(){
         int id;
         String firstName;
         String lastName;
         MaritalStatus status;
         Scanner scn=new Scanner(System.in);
-        System.out.println("Enter the id number");
-        while (!scn.hasNextInt()){
-            System.out.println("Id number must be an integer");
-            System.out.println("Enter the id number: ");
+
+        setId(readInt("ID number", scn));
+
+        setFirstName(readString("First name", scn));
+
+        setLastName(readString("Last name", scn));
+
+        setStatus(readMaritalStatus(scn));
+
+    }
+
+    private int readInt(String msg, Scanner scn){
+        int temp=-1;
+        while (temp == -1){
+        System.out.println("Enter the "+msg);
+            if (scn.hasNextInt()) {
+                temp= scn.nextInt();
+            } else {
+                System.out.println(msg + " must be an integer");
+                scn.next();
             }
-        id=scn.nextInt();
-        System.out.println("Enter the first name");
-        while (!scn.hasNext()){
-            System.out.println("Enter the first name");
         }
-        firstName=scn.next();
-        System.out.println("Enter the last name");
-        while (!scn.hasNext()){
-            System.out.println("Enter the last name");
-        }
-       lastName=scn.next();
-        System.out.println("Choose marital status: (S)ingle, (M)arried, (D)evorced");
-        switch ((scn.next()).toLowerCase()){
-            case "s": status=MaritalStatus.SINGLE;
-            break;
-            case "m": status=MaritalStatus.MARRIED;
-            break;
-            case "d": status=MaritalStatus.DEVORCED;
-            break;
-            default
+        return temp;
+    }
+
+    private String readString(String msg, Scanner scn){
+        String temp="";
+        System.out.println("Enter the " + msg);
+        if (scn.hasNext()) {
+            temp = scn.next();
+            }
+        return temp;
+    }
+
+    private MaritalStatus readMaritalStatus(Scanner scn){
+        while (true) {
+            System.out.println("Choose marital status: (S)ingle, (M)arried, (D)ivorced");
+            switch ((scn.next()).toLowerCase()) {
+                case "s":
+                    return MaritalStatus.SINGLE;
+                case "m":
+                    return MaritalStatus.MARRIED;
+                case "d":
+                    return MaritalStatus.DIVORCED;
+                default:
+                    System.out.println("Wrong choice");
+            }
         }
     }
 
-
+    @Override
+    public String toString() {
+        return String.format("%09d %-15s %-15s %8s", getId(), getFirstName(), getLastName(), getStatus());
+    }
 
     public int getId() {
         return id;
