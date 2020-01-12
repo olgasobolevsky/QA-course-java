@@ -11,7 +11,7 @@ public class Person {
        input();
     }
 
-    private void input(){
+    public void input(){
         int id;
         String firstName;
         String lastName;
@@ -28,7 +28,7 @@ public class Person {
 
     }
 
-    private int readInt(String msg, Scanner scn){
+    public int readInt(String msg, Scanner scn){
         int temp=-1;
         while (temp == -1){
         System.out.println("Enter the "+msg);
@@ -42,7 +42,7 @@ public class Person {
         return temp;
     }
 
-    private String readString(String msg, Scanner scn){
+    public String readString(String msg, Scanner scn){
         String temp="";
         System.out.println("Enter the " + msg);
         if (scn.hasNext()) {
@@ -51,7 +51,7 @@ public class Person {
         return temp;
     }
 
-    private MaritalStatus readMaritalStatus(Scanner scn){
+    public MaritalStatus readMaritalStatus(Scanner scn){
         while (true) {
             System.out.println("Choose marital status: (S)ingle, (M)arried, (D)ivorced");
             switch ((scn.next()).toLowerCase()) {
@@ -69,7 +69,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return String.format("%09d %-15s %-15s %8s", getId(), getFirstName(), getLastName(), getStatus());
+        return String.format("%09d %-15s %-15s %-8s", getId(), getFirstName(), getLastName(), getStatus());
     }
 
     public int getId() {
