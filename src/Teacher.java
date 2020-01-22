@@ -16,7 +16,7 @@ public class Teacher extends Person{
 
     @Override
     public String toString() {
-        return super.toString()+String.format("%10d",getWage());
+        return super.toString()+String.format("%8d",getWage());
     }
 
     public int getWage() {

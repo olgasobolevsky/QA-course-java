@@ -12,10 +12,7 @@ public class Person {
     }
 
     public void input(){
-        int id;
-        String firstName;
-        String lastName;
-        MaritalStatus status;
+
         Scanner scn=new Scanner(System.in);
 
         setId(readInt("ID number", scn));
@@ -28,7 +25,7 @@ public class Person {
 
     }
 
-    public int readInt(String msg, Scanner scn){
+    public static int readInt(String msg, Scanner scn){
         int temp=-1;
         while (temp == -1){
         System.out.println("Enter the "+msg);
@@ -42,7 +39,21 @@ public class Person {
         return temp;
     }
 
-    public String readString(String msg, Scanner scn){
+    public static double readDouble(String msg, Scanner scn){
+        double temp=-1;
+        while (temp == -1){
+            System.out.println("Enter the "+msg);
+            if (scn.hasNextDouble()) {
+                temp= scn.nextDouble();
+            } else {
+                System.out.println(msg + " must be a number");
+                scn.next();
+            }
+        }
+        return temp;
+    }
+
+    public static String readString(String msg, Scanner scn){
         String temp="";
         System.out.println("Enter the " + msg);
         if (scn.hasNext()) {
@@ -51,7 +62,7 @@ public class Person {
         return temp;
     }
 
-    public MaritalStatus readMaritalStatus(Scanner scn){
+    public static MaritalStatus readMaritalStatus(Scanner scn){
         while (true) {
             System.out.println("Choose marital status: (S)ingle, (M)arried, (D)ivorced");
             switch ((scn.next()).toLowerCase()) {
@@ -69,7 +80,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return String.format("%09d %-15s %-15s %-8s", getId(), getFirstName(), getLastName(), getStatus());
+        return String.format("%-9d|%-15s|%-15s|%-8s|", getId(), getFirstName(), getLastName(), getStatus());
     }
 
     public int getId() {
