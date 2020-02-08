@@ -95,10 +95,17 @@ public class Program {
                         break;
                     case 8: //Find students with average score between minimum and maximum
                         ArrayList <Student> studentsList=new ArrayList<Student>();
-                        double minimum;
-                        double maximum;
-                        minimum=Person.readDouble("Minimum score", scn);//read minimum score from user
-                        maximum=Person.readDouble("Maximum score",scn);//read maximum score from user
+                        double minimum = Person.readDouble("Minimum score", scn);//read minimum score from user
+                        while (minimum<0 || minimum >100){ //check if the minimum is a valid score
+                            System.out.println("The score must be between 0 and 100");
+                            minimum=Person.readDouble("Minimum score", scn);//read minimum score from user
+                        }
+                        double maximum = Person.readDouble("Maximum score", scn);//read maximum score from user
+                        while ( maximum >100 || maximum<minimum){ //check if the maximum is a valid score
+                            System.out.println("The score must be between 0 and 100, and bigger than "+ minimum);
+                            maximum=Person.readDouble("Maximum score", scn);//read maximum score from user
+                        }
+
                         //go throw the people list and check every person: if he is a student and if his average score
                         //between minimum and maximum scores
                         for (Person p: people){

@@ -1,5 +1,10 @@
 import java.util.Scanner;
 
+/**
+ * This class represents a teacher and it extends class Person.
+ * Teacher is represented by persons properties (id number, first name, last name, marital status)
+ * and by wage.
+ */
 public class Teacher extends Person{
     private int wage;
 

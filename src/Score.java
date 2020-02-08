@@ -1,3 +1,9 @@
+/**
+ * This class represents a students score.
+ * It has two variables: course - course name and value - the score.
+ * The score must be a number between 0 and 100
+ */
+
 public class Score {
     private String course;
     private double value;

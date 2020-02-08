@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * This class represents a person. Person is represented by:
+ * ID number, first name, last name and marital status.
+ */
 public class Person {
     public enum MaritalStatus{SINGLE, MARRIED, DIVORCED}
     private int id;
@@ -14,17 +18,23 @@ public class Person {
     public void input(){
 
         Scanner scn=new Scanner(System.in);
-
+        //get ID number from user
         setId(readInt("ID number", scn));
-
+        //get first name from user
         setFirstName(readString("First name", scn));
-
+        //get last name from user
         setLastName(readString("Last name", scn));
-
+        //get marital status from user
         setStatus(readMaritalStatus(scn));
 
     }
 
+    /**
+     * This function reads integer number from user
+     * @param msg
+     * @param scn
+     * @return
+     */
     public static int readInt(String msg, Scanner scn){
         int temp=-1;
         while (temp == -1){
@@ -39,6 +49,12 @@ public class Person {
         return temp;
     }
 
+    /**
+     * This function reads double number from user
+     * @param msg
+     * @param scn
+     * @return
+     */
     public static double readDouble(String msg, Scanner scn){
         double temp=-1;
         while (temp == -1){
@@ -53,6 +69,12 @@ public class Person {
         return temp;
     }
 
+    /**
+     * This function reads string from user
+     * @param msg
+     * @param scn
+     * @return
+     */
     public static String readString(String msg, Scanner scn){
         String temp="";
         System.out.println("Enter the " + msg);
@@ -62,6 +84,11 @@ public class Person {
         return temp;
     }
 
+    /**
+     * This function reads the marital status from user
+     * @param scn
+     * @return
+     */
     public static MaritalStatus readMaritalStatus(Scanner scn){
         while (true) {
             System.out.println("Choose marital status: (S)ingle, (M)arried, (D)ivorced");

@@ -1,5 +1,10 @@
 import java.util.ArrayList;
 
+/**
+ * This class represents a student and it extends class Person.
+ * Student is represented by persons properties (id number, first name, last name, marital status)
+ * and list of scores.
+ */
 public class Student extends Person {
     private ArrayList<Score> scores;
 
@@ -41,7 +46,7 @@ public class Student extends Person {
         }
         else {
             int i=1;
-            System.out.println(String.format("%03s)%-10s|%-10s","Ind)","Course","Score"));
+            System.out.println(String.format("%3s)%-10s|%-10s","Ind","Course","Score"));
             for (Score s : scores) {
                 System.out.println(String.format("%03d)%-10s|%-10f",i,s.getCourse(),s.getValue()));
                 i++;
