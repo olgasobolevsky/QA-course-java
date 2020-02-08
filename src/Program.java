@@ -2,15 +2,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import static java.lang.String.format;
 
+/**
+ * This program shows menu for user to: add teacher/student, print people, print teachers/students,
+ * find teacher/student by ID, edit students scores.
+ */
 public class Program {
     public static void main(String[] args) {
-        ArrayList<Person> people=new ArrayList<Person>();
+        ArrayList<Person> people=new ArrayList<Person>(); //List of people: teachers and students
         boolean flag=true;
         while (flag){
             Scanner scn = new Scanner(System.in);
             mainMenu(); //Show main menu on the screen
             int option;
-            if (scn.hasNextInt()) {
+            if (scn.hasNextInt()) { //check if the user has entered integer or ask him again
                 option= scn.nextInt(); //Choose an option (0-8)
                 switch (option)
                 {
@@ -21,7 +25,7 @@ public class Program {
                         people.add(new Student());
                         break;
                     case 3: //Print all people
-                        if (people.size() !=0) {
+                        if (people.size() !=0) { //if the list of people isn't empty
                             printPersonsArray(people);
                         }
                         else{
@@ -31,7 +35,7 @@ public class Program {
                     case 4: //Print all teachers
                         ArrayList <Teacher> teachersArray = new ArrayList<Teacher>();
                         for (Person p:people){
-                            if (p instanceof Teacher){
+                            if (p instanceof Teacher){ //if this person is a teacher, add him to the teachers list
                                 teachersArray.add((Teacher)p);
                             }
                         }
@@ -45,7 +49,7 @@ public class Program {
                     case 5: //Print all students
                         ArrayList <Student> studentsArray = new ArrayList<Student>();
                         for (Person p:people){
-                            if (p instanceof Student){
+                            if (p instanceof Student){ //if this person is a student, add him to the students list
                                 studentsArray.add((Student)p);
                             }
                         }
@@ -57,8 +61,9 @@ public class Program {
                         }
                         break;
                     case 6: //Find teacher by ID
-                        int teacherId = Person.readInt("ID number", scn);
+                        int teacherId = Person.readInt("ID number", scn); //read ID number from the user
                        ArrayList <Teacher> teacher=new ArrayList<Teacher>();
+                       //go throw the people list and check every person: if he is a teacher and if he has the ID that user gave
                         for (Person p: people){
                             if ((p instanceof Teacher) && (p.getId()==teacherId)){
                                 teacher.add((Teacher) p);
@@ -74,15 +79,16 @@ public class Program {
                     case 7: //Find student by ID
                         int studentId = Person.readInt("ID number", scn);
                         ArrayList <Student> student=new ArrayList<Student>();
+                        //go throw the people list and check every person: if he is a student and if he has the ID that user gave
                         for (Person p: people){
                             if ((p instanceof Student) && (p.getId()==studentId)){
                                 student.add((Student)p);
                             }
                         }
-                        if (student.size()==0){
+                        if (student.size()==0){ //If there is no student with given ID
                             System.out.println("No student with this ID number");
                         }
-                        else {
+                        else { //If there is a student with given ID, than you can edit his scores
                             printStudentsArray(student);
                             editStudent(student, scn);
                         }
@@ -91,8 +97,10 @@ public class Program {
                         ArrayList <Student> studentsList=new ArrayList<Student>();
                         double minimum;
                         double maximum;
-                        minimum=Person.readDouble("Minimum score", scn);
-                        maximum=Person.readDouble("Maximum score",scn);
+                        minimum=Person.readDouble("Minimum score", scn);//read minimum score from user
+                        maximum=Person.readDouble("Maximum score",scn);//read maximum score from user
+                        //go throw the people list and check every person: if he is a student and if his average score
+                        //between minimum and maximum scores
                         for (Person p: people){
                             if (p instanceof Student){
                                 double avgScore=((Student) p).getAverageScore();
@@ -141,7 +149,6 @@ public class Program {
     /**
      * This function shows the Edit Student menu on the screen
      */
-
      public static void editStudentMenu(){
          System.out.println("Student Menu: Choose one option please:");
          System.out.println("(1) Show All Scores");
@@ -201,33 +208,38 @@ public class Program {
         System.out.println();
     }
 
+    /**
+     * This function shows the menu for a specific student to: show scores, add score, show average score.
+     * @param student
+     * @param scn
+     */
     public static void editStudent(ArrayList<Student> student, Scanner scn){
         boolean flag = true;
         while (flag) {
-            editStudentMenu();
+            editStudentMenu(); //print the menu on the screen
             int option;
-            if (scn.hasNextInt()) {
+            if (scn.hasNextInt()) { //check if the user has entered integer or ask him again
                 option = scn.nextInt();
                 switch (option) {
-                    case 1:
+                    case 1: //show scores
                         for (Student s: student){
                             s.showScores();
                         };
                         break;
-                    case 2:
-                        String courseName=Person.readString("Course name", scn);
-                        double score=Person.readDouble("Score", scn);
+                    case 2: //add new score
+                        String courseName=Person.readString("Course name", scn); //get course name from the user
+                        double score=Person.readDouble("Score", scn); //get score from the user
                         for (Student s: student){
                             s.addScore(courseName, score);
                         };
                         break;
-                    case 3:
+                    case 3: //show average score
                         System.out.println(format("%-15s|%-15s|%s","First name","Last name","Avg. Score"));
                         for (Student s: student){
                             System.out.println(format("%-15s|%-15s|%f",s.getFirstName(),s.getLastName(),s.getAverageScore()));
                         };
                         break;
-                    case 0:
+                    case 0: //quit
                         flag = false;
                         break;
                     default:
